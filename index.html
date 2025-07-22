@@ -1,0 +1,1807 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AVIA ASIA LIMITED</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <style>
+        /****************** RESET & BASE STYLES *******************/
+        /* ===== RESET & BASE STYLES ===== */
+        :root {
+            --primary-color: #7ED321;
+            --secondary-color: #2c3e50;
+            --accent-color: #27ae60;
+            --text-color: #333;
+            --light-bg: #f8f9fa;
+            --dark-bg: #2c3e50;
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            overflow-x: hidden;
+            background-color: #f9f9f9;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            object-fit: cover;
+        }
+
+        /* ===== HEADER STYLES ===== */
+        header {
+            background: rgba(0, 0, 0, 0.92);
+            backdrop-filter: blur(10px);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            padding: 0;
+            transition: var(--transition);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        header.scrolled {
+            padding: 0.2rem 0;
+            background: linear-gradient(90.06deg, #050505be 0.07%, #0c472bb6 99.95%);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo img {
+            height: 70px;
+            transition: var(--transition);
+            cursor: pointer;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary-color);
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* ===== DROPDOWN STYLES ===== */
+        .language-dropdown {
+            position: relative;
+        }
+
+        .dropdown-btn {
+            background: none;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: white;
+            font-weight: 400;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 15px;
+            border-radius: 30px;
+            transition: var(--transition);
+            font-size: 1.1rem;
+        }
+
+        .dropdown-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .dropdown-btn::after {
+            content: "▼";
+            font-size: 0.7rem;
+            transition: var(--transition);
+        }
+
+        .dropdown-btn.active::after {
+            transform: rotate(180deg);
+        }
+
+        .dropdown-content {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background: rgb(255, 255, 255);
+            min-width: 180px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+            border-radius: 12px;
+            overflow: hidden;
+            opacity: 0;
+            padding: 10px;
+            margin: 10px;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: var(--transition);
+            z-index: 1001;
+        }
+
+        .dropdown-content.show {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .dropdown-content a {
+            display: block;
+            padding: 12px 20px;
+            color: var(--text-color);
+            text-decoration: none;
+            transition: var(--transition);
+            font-size: 0.95rem;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .dropdown-content a:last-child {
+            border-bottom: none;
+        }
+
+        .dropdown-content a:hover {
+            background: var(--light-bg);
+            color: var(--primary-color);
+            padding-left: 25px;
+        }
+
+        /* ===== MOBILE MENU STYLES ===== */
+        .mobile-menu-btn {
+            display: none;
+            /* Hidden by default */
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.8rem;
+            cursor: pointer;
+            transition: var(--transition);
+            z-index: 1001;
+            position: absolute;
+            top: 20px;
+            right: 40px;
+            /* Adjust to move left */
+        }
+
+        /* Show only on small screens */
+        @media (max-width: 768px) {
+            .mobile-menu-btn {
+                display: block;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links.show {
+                background: rgba(10, 10, 10, 0.952);
+            }
+
+            .nav-links a {
+                text-align: center;
+            }
+        }
+
+        /********************* HERO SECTION ******************/
+        .hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.863), rgba(80, 80, 80, 0.164)),
+                url('./assets/images/bg-banner-new.png') center/cover;
+            min-height: 110vh;
+            display: flex;
+            align-items: center;
+            padding: 100px 0 150px;
+            position: relative;
+            overflow: hidden;
+            clip-path: ellipse(100% 85% at 50% 0%);
+            text-align: center;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: -1px;
+            left: 0;
+            right: 0;
+            height: 100px;
+            background: white;
+            border-radius: 50% 50% 0 0 / 100px 100px 0 0;
+            transform: scaleX(3);
+        }
+
+        .hero-content {
+            color: white;
+            position: relative;
+            z-index: 2;
+            animation: fadeInUp 1s ease-out;
+            width: 100%;
+        }
+
+        .hero h1 {
+            font-size: clamp(2rem, 5vw, 4rem);
+            font-weight: bold;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+
+        .hero h1 .highlight {
+            color: var(--primary-color);
+        }
+
+        .hero p {
+            font-size: clamp(1rem, 3vw, 1.2rem);
+            margin: 0 auto 2.5rem;
+            opacity: 0.9;
+            max-width: 600px;
+            animation: fadeInUp 1s ease-out 0.2s forwards;
+            opacity: 0;
+        }
+
+        .apply-btn {
+            background: linear-gradient(45deg, var(--primary-color), #4CAF50);
+            color: white;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: var(--transition);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 4px 15px rgba(126, 211, 33, 0.3);
+            animation: fadeInUp 1s ease-out 0.4s forwards;
+            opacity: 0;
+        }
+
+        .apply-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 3px 30px rgba(215, 245, 181, 0.795);
+        }
+
+        /****************** ABOUT SECTION ***************/
+        .about-wrapper {
+            max-width: 1300px;
+            margin: -50px auto 0;
+            /* pulls it up 30px */
+            padding: 80px 20px;
+        }
+
+
+        .about-main-section {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            gap: 40px;
+            margin-bottom: 60px;
+        }
+
+        .about-text-content {
+            flex: 1 1 100%;
+            max-width: 100%;
+        }
+
+        .about-title {
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 700;
+            color: var(--secondary-color);
+            margin-bottom: 1rem;
+            line-height: 1.2;
+            animation: fadeInUp 1s ease-out;
+            text-align: left;
+        }
+
+        .about-tagline {
+            font-size: clamp(1.3rem, 3vw, 1.6rem);
+            color: var(--accent-color);
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            animation: fadeInUp 1s ease-out 0.2s forwards;
+            opacity: 0;
+            text-align: left;
+        }
+
+        @media (max-width: 768px) {
+
+            .about-title,
+            .about-tagline {
+                text-align: center;
+            }
+        }
+
+        .about-overview,
+        .about-company-details {
+            font-size: clamp(0.95rem, 2vw, 1.1rem);
+            color: #666;
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+            animation: fadeInUp 1s ease-out 0.4s forwards;
+            opacity: 0;
+            text-align: center;
+        }
+
+        .about-emphasis {
+            color: var(--secondary-color);
+            font-weight: 600;
+        }
+
+        .about-hero-img {
+            width: 100%;
+            max-width: 600px;
+            height: auto;
+            border-radius: 15px;
+            object-fit: cover;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+            animation: fadeInRight 1s ease-out;
+            transform: translateX(20px);
+            opacity: 0;
+            animation-fill-mode: forwards;
+            margin: 0 auto;
+            display: block;
+        }
+
+        /*************** SERVICES SECTION *************/
+        .about-services-section {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+            margin-top: 60px;
+        }
+
+        .about-service-card {
+            background: linear-gradient(145deg, #ffffffa9, #fbfdfbb9);
+            border-radius: 15px;
+            padding: 30px;
+            border: 1px solid #e8ecef;
+            max-width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+            position: relative;
+            opacity: 0;
+            transform: translateX(-50px);
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            margin: 0 auto;
+        }
+
+        .about-service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .about-service-card.align-right {
+            margin-left: auto;
+            flex-direction: column;
+            border-radius: 15px;
+            transform: translateX(50px);
+        }
+
+        .about-service-content {
+            flex: 1;
+            text-align: center;
+        }
+
+        .about-service-icon img,
+        .about-service-icon2 img {
+            width: 70px;
+            height: 70px;
+            object-fit: contain;
+            transition: var(--transition);
+        }
+
+        .about-service-card:hover .about-service-icon img,
+        .about-service-card:hover .about-service-icon2 img {
+            transform: scale(1.1);
+        }
+
+        .about-service-title,
+        .about-service-title2 {
+            font-size: 1.3rem;
+            color: var(--accent-color);
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .about-service-text,
+        .about-service-text2 {
+            color: #666;
+            line-height: 1.6;
+            font-size: 0.95rem;
+        }
+
+        /* ===== ANIMATIONS ===== */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInRight {
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        /************* What we do section ***************/
+        .what-we-do-container {
+            background: linear-gradient(90.06deg, #D0F6ED 0.07%, #fffdfde1 99.95%);
+            margin: 0;
+            padding: 5rem 20px;
+        }
+
+        .what-we-do {
+            max-width: 1300px;
+            margin: auto;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: center;
+            gap: 30px;
+        }
+
+        .what-we-do h2 {
+            width: 100%;
+            text-align: center;
+            font-size: clamp(1.8rem, 4vw, 3rem);
+            font-weight: 500;
+            margin-bottom: 30px;
+        }
+
+        .video-container {
+            flex: 1 1 100%;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .video-container video,
+        .video-container img {
+            width: 100%;
+            height: auto;
+            object-fit: cover;
+            display: block;
+        }
+
+        .cards {
+            flex: 1 1 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .card {
+            background-color: #f9f9f1;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 10px 10px 15px rgba(39, 39, 39, 0.1);
+        }
+
+        .card h3 {
+            color: #2E9444;
+            font-size: 1.2rem;
+            margin-bottom: 8px;
+        }
+
+        .card p {
+            color: #555;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        /************** Policy session ****************/
+        .session-bg {
+            padding: 60px 20px;
+        }
+
+        .policy-section {
+            max-width: 1300px;
+            margin: 0 auto;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 40px;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .policy-text {
+            flex: 1 1 100%;
+            min-width: 0;
+            text-align: center;
+        }
+
+        .policy-text h2 {
+            font-size: clamp(2rem, 5vw, 3rem);
+            color: #333;
+            margin-bottom: 20px;
+            line-height: 1.3;
+        }
+
+        .policy-text h2 span {
+            color: #70DB02;
+        }
+
+        .policy-text p {
+            font-size: clamp(0.95rem, 2vw, 1.1rem);
+            color: #555;
+            line-height: 1.7;
+            max-width: 100%;
+            margin: 0 auto;
+        }
+
+        .policy-services {
+            flex: 1 1 100%;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 20px;
+            padding: 0 10px;
+        }
+
+        .policy-card {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(66, 66, 66, 0.1);
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .policy-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .icon-img {
+            width: 50px;
+            height: 50px;
+            margin-bottom: 15px;
+        }
+
+        .policy-card h4 {
+            font-size: 1.1rem;
+            color: #2e7d32;
+            margin-bottom: 10px;
+        }
+
+        .policy-card p {
+            font-size: 0.9rem;
+            color: #666;
+            line-height: 1.6;
+        }
+
+        /***** Animation Fade in out policy ******/
+        @keyframes zoomFadeRotate {
+            0% {
+                opacity: 0;
+                transform: scale(0.9) rotate(3deg);
+            }
+
+            100% {
+                opacity: 1;
+                transform: scale(1) rotate(0deg);
+            }
+        }
+
+        .animate-zoom-rotate {
+            opacity: 0;
+            transform: scale(0.9) rotate(3deg);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .animate-zoom-rotate.visible {
+            opacity: 1;
+            transform: scale(1) rotate(0deg);
+        }
+
+
+        /************* AVia session ***************/
+        .avia-main {
+            padding: 40px 20px;
+            min-height: auto;
+            background: linear-gradient(90.06deg, #d0edf6 0.07%, #f8f8f8 99.95%);
+        }
+
+        .avia-wrapper {
+            max-width: 1200px;
+            margin: 0 auto;
+            border-radius: 15px;
+            padding: 30px 20px;
+        }
+
+        .avia-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .avia-brand {
+            color: #70DB02;
+            font-size: clamp(2rem, 5vw, 3rem);
+            font-weight: bold;
+            margin-bottom: 5px;
+            text-align: left;
+        }
+
+        .avia-slogan {
+            color: #232323;
+            font-size: clamp(1.5rem, 4vw, 2.2rem);
+            font-weight: 500;
+            margin-bottom: 15px;
+            text-align: left;
+        }
+
+        .avia-intro {
+            color: #666;
+            font-size: clamp(0.95rem, 2vw, 1.1rem);
+            line-height: 1.6;
+            max-width: 100%;
+            margin: 0 auto;
+            text-align: left;
+        }
+
+        .avia-stats {
+            margin-top: 40px;
+        }
+
+        .avia-stat-card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 30px;
+            padding: 30px 20px;
+            background: #f8f9fa;
+            box-shadow: 0 5px 20px rgba(82, 81, 81, 0.1);
+            border-radius: 12px;
+        }
+
+        .avia-progress-box {
+            width: 100%;
+            max-width: 300px;
+            height: 80px;
+            position: relative;
+            margin-right: 0;
+            margin-bottom: 20px;
+        }
+
+        .avia-progress-bg {
+            width: 100%;
+            height: 100%;
+            background: #333;
+            border-radius: 8px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .avia-progress-fill {
+            height: 100%;
+            border-radius: 8px;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .avia-progress-fill.red {
+            background: #FF4444;
+            --target-width: 22%;
+        }
+
+        .avia-progress-fill.blue {
+            background: #2196F3;
+            --target-width: 72%;
+        }
+
+        .avia-progress-fill.green {
+            background: #4CAF50;
+            --target-width: 80%;
+        }
+
+        .avia-percent {
+            color: white;
+            font-size: 1.5rem;
+            font-weight: bold;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 2;
+        }
+
+        .avia-label {
+            color: white;
+            font-size: 0.8rem;
+            position: absolute;
+            bottom: 8px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 2;
+            text-align: center;
+            white-space: nowrap;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
+        }
+
+        .avia-stat-text {
+            flex: 1;
+            color: #555;
+            font-size: clamp(0.95rem, 2vw, 1.1rem);
+            line-height: 1.5;
+            text-align: center;
+        }
+
+        @keyframes fillLiquid {
+            0% {
+                width: 0%;
+            }
+
+            100% {
+                width: var(--target-width);
+            }
+        }
+
+        .avia-progress-fill {
+            animation: fillLiquid 2.5s ease-in-out forwards;
+            width: 0%;
+        }
+
+        /**** animation fade in out *****/
+        .reveal-element {
+            opacity: 0;
+            transform: translateY(50px) scale(0.95);
+            transition: all 0.8s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        .reveal-in {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+
+        /************** Footer & Vission *******************/
+        .core-vision-section {
+            padding: 40px 0 60px 0;
+        }
+
+        .core-vision-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .content-wrapper {
+            background: white;
+            padding: 30px 20px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+            margin-bottom: 30px;
+            border-radius: 15px;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .section-title {
+            font-size: clamp(1.8rem, 4vw, 2.5rem);
+            font-weight: 600;
+            color: #232323;
+            margin-bottom: 15px;
+            line-height: 1.3;
+        }
+
+        .section-subtitle {
+            font-size: clamp(0.95rem, 2vw, 1.1rem);
+            color: #666;
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 0;
+            /* Remove auto centering */
+            text-align: left;
+            display: block;
+        }
+
+        .vision-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .vision-item {
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            padding: 20px;
+            transition: transform 0.3s ease;
+        }
+
+        .vision-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .vision-image {
+            width: 100%;
+            height: auto;
+            margin-bottom: 20px;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: rgb(0, 0, 0);
+        }
+
+        .vision-icon-img {
+            width: 100%;
+            max-width: 400px;
+            border-radius: 20px;
+            min-width: 80px;
+            min-height: 80px;
+            object-fit: contain;
+            height: auto;
+            display: block;
+            margin: 0 auto;
+        }
+
+
+        .vision-title {
+            font-size: 1.3rem;
+            color: #2E9444;
+            font-weight: 600;
+            margin-bottom: 15px;
+            z-index: 2;
+            margin-top: 10px;
+            position: relative;
+        }
+
+        .vision-description {
+            font-size: 0.95rem;
+            line-height: 1.6;
+            z-index: 2;
+            position: relative;
+            padding: 0 10px;
+            opacity: 0.95;
+        }
+
+        .providers-area {
+            margin-top: 30px;
+            padding: 30px 0;
+        }
+
+        .providers-heading {
+            text-align: center;
+            font-size: 1.2rem;
+            color: #2c3e50;
+            margin-bottom: 20px;
+            font-weight: 500;
+        }
+
+        .logo-carousel {
+            overflow: hidden;
+            position: relative;
+            height: 80px;
+        }
+
+        .logo-track {
+            display: flex;
+            animation: slideLogos 15s linear infinite;
+            width: fit-content;
+        }
+
+        .logo-item {
+            flex-shrink: 0;
+            margin: 0 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 60px;
+            opacity: 0.9;
+            transition: transform 0.3s ease, opacity 0.3s ease;
+            transform: scale(1.2);
+        }
+
+        .logo-item img {
+            max-height: 50%;
+            width: auto;
+        }
+
+        .logo-item:hover {
+            opacity: 1;
+        }
+
+        @keyframes slideLogos {
+            0% {
+                transform: translateX(0);
+            }
+
+            100% {
+                transform: translateX(-50%);
+            }
+        }
+
+        .section-footer {
+            position: relative;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            text-align: center;
+            padding: 20px;
+            background: linear-gradient(90.06deg, #050505be 0.07%, #0c472bb6 99.95%);
+            color: white;
+            font-size: 0.9rem;
+            font-weight: 600;
+            z-index: 100;
+            margin-top: -1rem;
+        }
+
+        /*************  RESPONSIVE STYLES  **************/
+        @media (min-width: 576px) {
+            .hero {
+                text-align: left;
+            }
+
+            .hero-content {
+                text-align: left;
+            }
+
+            .hero p {
+                margin-left: 0;
+            }
+
+            .about-text-content {
+                text-align: left;
+            }
+
+            .about-overview,
+            .about-company-details {
+                text-align: left;
+            }
+
+            .about-service-card {
+                flex-direction: row;
+                text-align: left;
+                max-width: 800px;
+            }
+
+            .about-service-content {
+                text-align: left;
+            }
+
+            .avia-stat-card {
+                flex-direction: row;
+                text-align: left;
+            }
+
+            .avia-progress-box {
+                margin-right: 30px;
+                margin-bottom: 0;
+            }
+
+            .avia-stat-text {
+                text-align: left;
+            }
+
+            .section-header {
+                text-align: left;
+            }
+
+            .section-title {
+                text-align: left;
+            }
+        }
+
+        @media (min-width: 768px) {
+            .about-text-content {
+                flex: 1 1 50%;
+                max-width: 50%;
+            }
+
+            .about-image-content {
+                flex: 1 1 45%;
+            }
+
+            .video-container {
+                flex: 1 1 45%;
+            }
+
+            .cards {
+                flex: 1 1 45%;
+            }
+
+            .policy-text {
+                flex: 1 1 40%;
+                text-align: left;
+            }
+
+            .policy-services {
+                flex: 1 1 55%;
+            }
+
+            .about-service-card.align-right {
+                flex-direction: row-reverse;
+                margin-left: auto;
+                border-radius: 100px 0 0 100px;
+            }
+
+            .about-service-card {
+                border-radius: 0 100px 100px 0;
+            }
+        }
+
+        @media (min-width: 992px) {
+            .nav-links {
+                gap: 2rem;
+            }
+
+            .nav-links a {
+                font-size: 1.1rem;
+            }
+
+            .logo img {
+                height: 70px;
+            }
+
+            .about-wrapper {
+                padding: 100px 20px;
+            }
+
+            .what-we-do-container {
+                padding: 8rem 20px;
+            }
+
+            .session-bg {
+                padding: 80px 20px;
+            }
+
+            .avia-wrapper {
+                padding: 40px;
+            }
+
+            .core-vision-section {
+                padding: 60px 0 80px 0;
+            }
+
+            .content-wrapper {
+                padding: 50px;
+            }
+
+            .logo-carousel {
+                height: 120px;
+            }
+
+            .logo-item {
+                height: 100px;
+                margin: 0 50px;
+                transform: scale(1.4);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                position: fixed;
+                top: 80px;
+                left: 0;
+                right: 0;
+                background: rgba(0, 0, 0, 0.95);
+                flex-direction: column;
+                padding: 2rem;
+                gap: 1.5rem;
+                transform: translateY(-100%);
+                opacity: 0;
+                visibility: hidden;
+                transition: var(--transition);
+            }
+
+            .nav-links.show {
+                transform: translateY(0);
+                opacity: 1;
+                visibility: visible;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .hero::after {
+                height: 50px;
+                border-radius: 50% 50% 0 0 / 50px 50px 0 0;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero::after {
+                height: 40px;
+                border-radius: 50% 50% 0 0 / 40px 40px 0 0;
+            }
+
+            .apply-btn {
+                padding: 10px 25px;
+                font-size: 0.9rem;
+            }
+
+            .about-service-card {
+                padding: 25px;
+            }
+
+            .policy-card {
+                padding: 15px;
+            }
+
+            .avia-stat-card {
+                padding: 20px 15px;
+            }
+
+            .section-footer {
+                padding: 15px;
+                font-size: 0.8rem;
+            }
+        }
+
+        /* animation fade in footer part */
+        /* Fade-in animation */
+        @keyframes fadeInUp {
+            0% {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in-up {
+            opacity: 0;
+            animation: fadeInUp 1s ease-out forwards;
+        }
+
+        /* Optional: staggered animation */
+        .fade-delay-1 {
+            animation-delay: 0.3s;
+        }
+
+        .fade-delay-2 {
+            animation-delay: 0.6s;
+        }
+
+        .fade-delay-3 {
+            animation-delay: 0.9s;
+        }
+
+        .fade-element {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease-out;
+        }
+
+        .fade-in {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header Section -->
+    <header id="header">
+        <nav class="container">
+            <div class="logo">
+                <a href="#home">
+                    <img src="./assets/images/logo-new.png" alt="AVIA ASIA Logo">
+                </a>
+            </div>
+
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="./assets/images/avia-whitepaper-en.pdf">Whitepaper</a></li>
+                <li><a href="#vision">Vision</a></li>
+                <li class="language-dropdown">
+                    <button class="dropdown-btn" id="languageBtn">
+                        <i class="fas fa-globe"></i> Language
+                    </button>
+                    <div class="dropdown-content" id="languageDropdown">
+                        <a href="#" onclick="changeLanguage('English')">English</a>
+                        <a href="#" onclick="changeLanguage('Bahasa Malaysia')">Bahasa Malaysia</a>
+                        <a href="#" onclick="changeLanguage('中文')">中文</a>
+                        <a href="#" onclick="changeLanguage('Tamil')">Tamil</a>
+                    </div>
+                </li>
+            </ul>
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container">
+            <div class="hero-content fade-element">
+                <h1>
+                    <span class="highlight">AVIA ASIA</span> LIMITED<br>
+                    Make Every Policy A Valuable Asset
+                </h1>
+                <p>
+                    We are not "selling insurance"; we are building a new insurance finance system where everyone can
+                    participate and share in the returns.
+                </p>
+                <button class="apply-btn">Apply Now</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <div class="about-wrapper" id="about">
+        <div class="about-main-section">
+            <div class="about-text-content fade-element">
+                <h1 class="about-title">About Us</h1>
+                <h2 class="about-tagline">From Insurance to Asset Freedom</h2>
+
+                <p class="about-overview fade-element">
+                    We are an innovative platform integrating insurance and fintech, headquartered in Hong Kong with
+                    business across multiple Asian markets. Through partnerships with insurance companies, trust
+                    institutions, and regulatory sandboxes, we drive the digitalization of traditional policy assets and
+                    unlock long-term value.
+                </p>
+
+                <p class="about-company-details">
+                    The platform is part of the renowned British insurance group <span class="about-emphasis">Aviva
+                        plc</span>, with a history of <span class="about-emphasis">over 300 years</span> and more than
+                    <span class="about-emphasis">30 million customers</span> globally — a symbol of financial stability
+                    and trust.
+                </p>
+            </div>
+
+            <div class="about-image-content fade-element">
+                <video class="about-hero-img" autoplay muted loop playsinline>
+                    <source src="./assets/images/about-partA.mp4" type="video/mp4">
+                </video>
+            </div>
+        </div>
+
+        <div class="about-services-section">
+            <div class="about-service-card fade-element">
+                <div class="about-service-content">
+                    <h3 class="about-service-title">Digitalization of Insurance Assets</h3>
+                    <p class="about-service-text">
+                        Transform traditional savings policies, annuities, and other valuable assets into digital
+                        certificates using technology for more transparent management and flexible operations.
+                    </p>
+                </div>
+                <div class="about-service-icon">
+                    <img src="./assets/images/Group-1.png" alt="Digitalization Icon">
+                </div>
+            </div>
+
+            <div class="about-service-card align-right fade-element">
+                <div class="about-service-content">
+                    <h3 class="about-service-title">On-Chain Policy Value</h3>
+                    <p class="about-service-text">
+                        Each policy asset is certified on-chain, ensuring that every investment is backed by real
+                        assets—safe, reliable, and clearly valued.
+                    </p>
+                </div>
+                <div class="about-service-icon">
+                    <img src="./assets/images/Group-2.png" alt="Blockchain Icon">
+                </div>
+            </div>
+
+            <div class="about-service-card fade-element">
+                <div class="about-service-content">
+                    <h3 class="about-service-title">Empowering Individuals & Institutions</h3>
+                    <p class="about-service-text">
+                        Whether it's personal wealth planning or low-risk income needs of institutions, we enable
+                        participation in the long-term value growth of insurance finance.
+                    </p>
+                </div>
+                <div class="about-service-icon">
+                    <img src="./assets/images/Group-3.png" alt="Empowerment Icon">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- What we do section -->
+    <section class="what-we-do-container reveal-element">
+        <div class="what-we-do">
+            <h2>What We Do</h2>
+            <div class="video-container">
+                <video src="./assets/images/about-PartB.mp4" autoplay muted loop playsinline></video>
+            </div>
+            <div class="cards">
+                <div class="card fade-element">
+                    <h3>Insurance Asset Digitalization:</h3>
+                    <p>Convert savings-type policies and annuities with cash value into digital assets for more
+                        transparent
+                        management and flexible operations.</p>
+                </div>
+                <div class="card fade-element">
+                    <h3>Empowering Individuals & Institutions:</h3>
+                    <p>Whether personal financial planning or institutional investment, you can participate in low-risk,
+                        long-term estate growth in insurance finance.</p>
+                </div>
+                <div class="card fade-element">
+                    <h3>On-Chain Policy Value:</h3>
+                    <p>Each policy is certified on-chain, with real, traceable assets—safe, reliable, and clearly
+                        valued.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- What We Do Section  END-->
+
+    <!-- Policy Session  END-->
+    <section class="session-bg">
+        <div class="policy-section ">
+            <!-- Left: Text Content -->
+            <div class="policy-text animate-zoom-rotate">
+                <h2>Turn Your Policy into<br><span>Cash Flow</span></h2>
+                <p>
+                    We provide a one-stop service around five key areas of policy assets:
+                    verification, value enhancement, circulation, inheritance, and liquidity.
+                    From valuation and digital registration to dividend withdrawal and liquidity
+                    management, we help you turn “dormant insurance” into a wealth tool
+                    that is accessible, configurable, and transferable.
+                </p>
+            </div>
+
+            <!-- Right: Services Grid -->
+            <div class="policy-services">
+                <div class="policy-card animate-zoom-rotate">
+                    <img src="./assets/images/asset-i.png" alt="Confirm Icon" class="icon-img" />
+                    <h4>Asset Confirmation</h4>
+                    <p>Understand the real value of your policy and clarify your asset status.</p>
+                </div>
+
+                <div class="policy-card animate-zoom-rotate">
+                    <img src="./assets/images/resgi-i.png" alt="Register Icon" class="icon-img" />
+                    <h4>Rights Registration</h4>
+                    <p>Convert policies into manageable digital assets to enhance value and liquidity.</p>
+                </div>
+
+                <div class="policy-card animate-zoom-rotate">
+                    <img src="./assets/images/inc-i.png" alt="Income Icon" class="icon-img" />
+                    <h4>Income Plan</h4>
+                    <p>Flexible income plans with monthly or quarterly dividend withdrawals.</p>
+                </div>
+
+                <div class="policy-card animate-zoom-rotate">
+                    <img src="./assets/images/liquid-i.png" alt="Liquidity Icon" class="icon-img" />
+                    <h4>Liquidity Management</h4>
+                    <p>Support asset withdrawal, transfer, and collateralization with flexible control.</p>
+                </div>
+
+                <div class="policy-card animate-zoom-rotate">
+                    <img src="./assets/images/custo-i.png" alt="Inheritance Icon" class="icon-img" />
+                    <h4>Inheritance Planning</h4>
+                    <p>Ensure smooth transfer of your policy assets to beneficiaries or next of kin.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Avia Session -->
+    <div class="avia-main reveal-element">
+        <div class="avia-wrapper">
+            <div class="avia-header reveal-element">
+                <div class="avia-brand">Avia Asia —</div>
+                <div class="avia-slogan">The Engine Behind Your Assets</div>
+                <div class="avia-intro">
+                    Your policy is more than just a contract — it is a potential asset. We help users
+                    confirm asset ownership, unlock returns, and manage liquidity, turning a static
+                    insurance product into a comfortable, accessible, and strategic wealth engine.
+                </div>
+            </div>
+
+            <div class="avia-stats">
+                <div class="avia-stat-card reveal-element" style="transition-delay: 0.1s">
+                    <div class="avia-progress-box">
+                        <div class="avia-progress-bg">
+                            <div class="avia-progress-fill red"></div>
+                            <div class="avia-percent">22%</div>
+                            <div class="avia-label">Advice Monthly Cash</div>
+                        </div>
+                    </div>
+                    <div class="avia-stat-text reveal-element" style="transition-delay: 0.1s"">
+                        Through analysis of investment and allocation strategies, policy
+                        assets deliver 22% more monthly withdrawable income
+                        compared to traditional methods — stable, sustainable, and
+                        ready for household cash flow support.
+                    </div>
+                </div>
+
+                <div class=" avia-stat-card reveal-element" style="transition-delay: 0.1s"">
+                    <div class=" avia-progress-box">
+                        <div class="avia-progress-bg">
+                            <div class="avia-progress-fill blue"></div>
+                            <div class="avia-percent">72%</div>
+                            <div class="avia-label">72% of Long-term Policyholders</div>
+                        </div>
+                    </div>
+                    <div class="avia-stat-text">
+                        Data reveal significantly enhanced live savings cash value of
+                        policies held for more than 5 years — our core verification
+                        studies and yields discover an average 72% valuation
+                        up-shift.
+                    </div>
+                </div>
+
+                <div class="avia-stat-card">
+                    <div class="avia-progress-box">
+                        <div class="avia-progress-bg">
+                            <div class="avia-progress-fill green"></div>
+                            <div class="avia-percent">80%</div>
+                            <div class="avia-label">80% of 60+ years verified</div>
+                        </div>
+                    </div>
+                    <div class="avia-stat-text">
+                        When conducting second policy audits, we increase the legacy
+                        potential of estate liquidity, including portfolio excess,
+                        proper inheritance, and improved risk offsetting from
+                        valuable assets.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Footer Session -->
+    <div class="core-vision-section" id="vision">
+        <div class="core-vision-container">
+            <div class="content-wrapper">
+                <div class="section-header fade-element">
+                    <h1 class="section-title">Our Core Values & Future Vision</h1>
+                    <p class="section-subtitle">
+                        Together, we're shaping a new future for insurance assets—transforming</br>protection into
+                        sustainable, stable financial momentum for long-term </br>value growth and secure wealth
+                        succession.
+                    </p>
+                </div>
+
+                <div class="vision-grid">
+                    <div class="vision-item fade-element">
+                        <div class="vision-image philosophy-theme">
+                            <img src="./assets/images/philo-logo.png" alt="Philosophy Icon" class="vision-icon-img" />
+                            <h3 class="vision-title">Our Philosophy</h3>
+                            <p class="vision-description">
+                                Built on integrity and driven by innovation, we are committed to providing every client
+                                with a transparent, secure, and efficient insurance asset management experience. We
+                                believe everyone deserves the best protection and long-term financial security.
+                            </p>
+                        </div>
+                    </div>
+
+
+                    <div class="vision-item fade-element">
+                        <div class="vision-image vision-theme">
+                            <img src="./assets/images/vision-logo.png" alt="Philosophy Icon" class="vision-icon-img" />
+                            <h3 class="vision-title">Our Vision</h3>
+                            <p class="vision-description">
+                                To become Asia's leading platform for digital insurance asset management—pioneering the
+                                transformation of traditional insurance into smart liquid assets that unlock greater
+                                financial value from every policy.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="vision-item fade-element">
+                        <div class="vision-image commitment-theme">
+                            <img src="./assets/images/commit-logo.png" alt="Philosophy Icon" class="vision-icon-img" />
+                            <h3 class="vision-title">Our Commitment</h3>
+                            <p class="vision-description">
+                                We are dedicated to safeguarding client interests, adhering to regulatory standards, and
+                                integrating cutting-edge technology with professional service to build trusted,
+                                long-term wealth partnerships.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="providers-area">
+                <h3 class="providers-heading">Private health insurance providers include</h3>
+                <div class="logo-carousel fade-element">
+                    <div class="logo-track">
+                        <!-- First set of logos -->
+                        <div class="logo-item">
+                            <img src="./assets/images/logo1.png" alt="Aetna Logo" width="80" height="40" />
+                        </div>
+                        <div class="logo-item">
+                            <img src="./assets/images/logo2.png" alt="ALC Logo" width="80" height="40" />
+                        </div>
+                        <div class="logo-item">
+                            <img src="./assets/images/logo3.png" alt="Allianz Care Logo" width="100" height="40" />
+                        </div>
+                        <div class="logo-item">
+                            <img src="./assets/images/logo4.png" alt="April Logo" width="80" height="40" />
+                        </div>
+                        <div class="logo-item">
+                            <img src="./assets/images/logo5.png" alt="AXA Logo" width="60" height="40" />
+                        </div>
+                        <div class="logo-item">
+                            <img src="./assets/images/logo6.png" alt="Cigna Logo" width="80" height="40" />
+                        </div>
+                        <div class="logo-item">
+                            <img src="./assets/images/logo7.png" alt="FI Logo" width="60" height="40" />
+                        </div>
+
+                        <!-- Duplicate set for seamless loop -->
+                        <div class="logo-item">
+                            <img src="./assets/images/logo1.png" alt="Aetna Logo" width="80" height="40" />
+                        </div>
+                        <div class="logo-item">
+                            <img src="./assets/images/logo2.png" alt="ALC Logo" width="80" height="40" />
+                        </div>
+                        <div class="logo-item">
+                            <img src="./assets/images/logo3.png" alt="Allianz Care Logo" width="100" height="40" />
+                        </div>
+                        <div class="logo-item">
+                            <img src="./assets/images/logo4.png" alt="April Logo" width="80" height="40" />
+                        </div>
+                        <div class="logo-item">
+                            <img src="./assets/images/logo5.png" alt="AXA Logo" width="60" height="40" />
+                        </div>
+                        <div class="logo-item">
+                            <img src="./assets/images/logo6.png" alt="Cigna Logo" width="80" height="40" />
+                        </div>
+                        <div class="logo-item">
+                            <img src="./assets/images/logo7.png" alt="FI Logo" width="60" height="40" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="section-footer">
+        Copyright © 2025— AVIA ASIA LIMITED
+    </div>
+
+    <script>
+        // Mobile menu toggle
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const navLinks = document.getElementById('navLinks');
+        mobileMenuBtn.addEventListener('click', () => {
+            navLinks.classList.toggle('show');
+            mobileMenuBtn.innerHTML = navLinks.classList.contains('show') ?
+                '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
+        });
+
+        // Language dropdown
+        const languageBtn = document.getElementById('languageBtn');
+        const languageDropdown = document.getElementById('languageDropdown');
+        languageBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            languageDropdown.classList.toggle('show');
+            languageBtn.classList.toggle('active');
+        });
+
+        // Close dropdowns when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('.language-dropdown')) {
+                languageDropdown.classList.remove('show');
+                languageBtn.classList.remove('active');
+            }
+        });
+
+        // Change language function
+        function changeLanguage(language) {
+            languageBtn.innerHTML = `<i class="fas fa-globe"></i> ${language}`;
+            languageDropdown.classList.remove('show');
+            languageBtn.classList.remove('active');
+            console.log('Language changed to:', language);
+        }
+
+        // Close mobile menu when clicking on a link
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('show');
+                mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+            });
+        });
+
+        // Header scroll effect
+        window.addEventListener('scroll', () => {
+            const header = document.getElementById('header');
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // Scroll animations
+        function animateOnScroll() {
+            const serviceCards = document.querySelectorAll('.about-service-card');
+            serviceCards.forEach((card, index) => {
+                const cardPosition = card.getBoundingClientRect().top;
+                const screenPosition = window.innerHeight / 1.3;
+                if (cardPosition < screenPosition) {
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateX(0)';
+                    card.style.transitionDelay = `${index * 0.1}s`;
+                }
+            });
+        }
+
+        // Initialize animations
+        window.addEventListener('load', () => {
+            animateOnScroll();
+        });
+        window.addEventListener('scroll', animateOnScroll);
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    window.scrollTo({
+                        top: target.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Restart animation when clicking on cards
+        document.querySelectorAll('.asset-card').forEach(card => {
+            card.addEventListener('click', () => {
+                const liquid = card.querySelector('.liquid');
+                liquid.style.animation = 'none';
+                liquid.offsetHeight; // Trigger reflow
+                liquid.style.animation = null;
+            });
+        });
+
+        // Add entrance animation
+        document.addEventListener('DOMContentLoaded', () => {
+            const cards = document.querySelectorAll('.asset-card');
+            cards.forEach((card, index) => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(30px)';
+                card.style.transition = 'all 0.6s ease';
+
+                setTimeout(() => {
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }, index * 200);
+            });
+        });
+
+        // Liquid animation function
+        function animateLiquid() {
+            const liquidElements = document.querySelectorAll('.liquid');
+            liquidElements.forEach(liquid => {
+                const targetWidth = liquid.style.getPropertyValue('--target-width') || '0%';
+                liquid.style.width = targetWidth;
+            });
+        }
+
+        // Initialize liquid animations when page loads
+        window.addEventListener('load', animateLiquid);
+
+        // Re-animate liquid on hover
+        document.querySelectorAll('.asset-card').forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                const liquid = card.querySelector('.liquid');
+                liquid.style.animation = 'fillUp 3s ease-in-out forwards, pulse 1.5s infinite';
+            });
+
+            card.addEventListener('mouseleave', () => {
+                const liquid = card.querySelector('.liquid');
+                liquid.style.animation = 'fillUp 3s ease-in-out forwards';
+            });
+        });
+
+        /*********** Footer fade-in animation ***********/
+        const footerObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('fade-in');
+                } else {
+                    entry.target.classList.remove('fade-in');
+                }
+            });
+        }, {
+            threshold: 0.1, // trigger when 10% is visible
+        });
+
+        document.querySelectorAll('.fade-element').forEach(el => {
+            footerObserver.observe(el);
+        });
+
+        /*********** AVIA reveal animation ***********/
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('reveal-in');
+                } else {
+                    entry.target.classList.remove('reveal-in'); // optional reset
+                }
+            });
+        }, { threshold: 0.15 });
+
+        document.querySelectorAll('.reveal-element').forEach(el => {
+            revealObserver.observe(el);
+        });
+
+        /*********** Policy animation ***********/
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('reveal-in');
+                } else {
+                    entry.target.classList.remove('reveal-in'); // optional reset
+                }
+            });
+        }, {
+            threshold: 0.1
+        });
+
+        document.querySelectorAll('.animate-zoom-rotate').forEach((el) => {
+            observer.observe(el);
+        });
+    </script>
+</body>
+
+</html>
